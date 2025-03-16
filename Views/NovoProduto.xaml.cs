@@ -1,5 +1,4 @@
 using MauiAppMinhasCompras.Models;
-using System.Threading.Tasks;
 
 namespace MauiAppMinhasCompras.Views;
 
