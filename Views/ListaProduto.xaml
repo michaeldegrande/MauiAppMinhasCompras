@@ -16,11 +16,11 @@
         <ListView x:Name="lst_produtos">
             <ListView.Header>
                 <Grid ColumnDefinitions="*, *, *, *, *, *">
-                    <Label Grid.Column="0" Text="{Binding Id}"/>
-                    <Label Grid.Column="1" Text="{Binding Descricao}"/>
-                    <Label Grid.Column="2" Text="{Binding Preco}"/>
-                    <Label Grid.Column="3" Text="{Binding Quantidade}"/>
-                    <Label Grid.Column="4" Text="{Binding Total}"/>
+                    <Label Grid.Column="0" Text="Id"/>
+                    <Label Grid.Column="1" Text="Descricao"/>
+                    <Label Grid.Column="2" Text="Preco"/>
+                    <Label Grid.Column="3" Text="Quantidade"/>
+                    <Label Grid.Column="4" Text="Total"/>
                 </Grid>
                       
             </ListView.Header>
@@ -30,6 +30,13 @@
                         <ViewCell.ContextActions>
                             <MenuItem Text="Remover"/>
                         </ViewCell.ContextActions>
+                        <Grid ColumnDefinitions="*, *, *, *, *, *">
+                            <Label Grid.Column="0" Text="{Binding Id}"/>
+                            <Label Grid.Column="1" Text="{Binding Descricao}"/>
+                            <Label Grid.Column="2" Text="{Binding Preco}"/>
+                            <Label Grid.Column="3" Text="{Binding Quantidade}"/>
+                            <Label Grid.Column="4" Text="{Binding Total}"/>
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
