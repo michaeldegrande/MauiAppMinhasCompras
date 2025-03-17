@@ -9,7 +9,7 @@
         <ToolbarItem Text="Adicionar" Clicked="Toolbaritem_Clicked"/>
     </ContentPage.ToolbarItems>
     
-    <VerticalStackLayout>
+    <VerticalStackLayout Padding="10" Margin="5" BackgroundColor="Beige">
         <SearchBar x:Name="txt_search"
                    Placeholder="Busque o Produto"
                    TextChanged="txt_search_TextChanged"/>
@@ -28,7 +28,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Text="Remover"/>
+                            <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
                         </ViewCell.ContextActions>
                         <Grid ColumnDefinitions="*, *, *, *, *, *">
                             <Label Grid.Column="0" Text="{Binding Id}"/>
