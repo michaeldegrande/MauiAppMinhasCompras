@@ -42,4 +42,13 @@ public partial class ListaProduto : ContentPage
 
         tmp.ForEach(i => Lista.Add(i));
     }
+
+	private void Toolbaritem_Clicked_1(object sender, EventArgs e)
+	{
+		double soma = Lista.Sum(i => i.Total);
+
+		string msg = $"O Total é {soma:C}";
+
+		DisplayAlert("Total dos Produtos", msg, "OK");
+	}
 }
