@@ -6,11 +6,13 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Somar"/>
-        <ToolbarItem Text="Adcionar" Clicked="toolbaritem_Clicked"/>
+        <ToolbarItem Text="Adicionar" Clicked="Toolbaritem_Clicked"/>
     </ContentPage.ToolbarItems>
     
     <VerticalStackLayout>
-        <SearchBar x:Name="txt_search" Placeholder="Busque o Produto"/>
+        <SearchBar x:Name="txt_search"
+                   Placeholder="Busque o Produto"
+                   TextChanged="txt_search_TextChanged"/>
         <ListView x:Name="lst_produtos">
             <ListView.Header>
                 <Grid ColumnDefinitions="*, *, *, *, *, *">
