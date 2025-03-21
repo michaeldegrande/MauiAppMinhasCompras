@@ -1,5 +1,6 @@
 using MauiAppMinhasCompras.Models;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace MauiAppMinhasCompras.Views;
 
@@ -13,11 +14,18 @@ public partial class ListaProduto : ContentPage
 		lst_produtos.ItemsSource = Lista;
 	}
 
-    protected async override void OnAppearing()
-    {
-        List<Produto> tmp = await App.Db.GetAll();
+	protected async override void OnAppearing()
+	{
+		try
+		{
+			List<Produto> tmp = await App.Db.GetAll();
 
-		tmp.ForEach(i => Lista.Add(i));
+			tmp.ForEach(i => Lista.Add(i));
+		}
+		catch (Exception ex)
+		{
+			await DisplayAlert("Ops", ex.Message, "OK");
+		}
 	}
 
     private void Toolbaritem_Clicked(object sender, EventArgs e)
@@ -32,28 +40,61 @@ public partial class ListaProduto : ContentPage
 		}
 	}
 
-	private async void txt_search_TextChanged(object sender, TextChangedEventArgs e) 
+	private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
 	{
-		string q = e.NewTextValue;
 
-		Lista.Clear();
+		try
+		{
+			string q = e.NewTextValue;
 
-        List<Produto> tmp = await App.Db.Search(q);
+			Lista.Clear();
 
-        tmp.ForEach(i => Lista.Add(i));
-    }
+			List<Produto> tmp = await App.Db.Search(q);
+
+			tmp.ForEach(i => Lista.Add(i));
+		}
+		catch (Exception ex)
+		{
+			await DisplayAlert("Ops", ex.Message, "OK");
+		}
+	}
+
 
 	private void Toolbaritem_Clicked_1(object sender, EventArgs e)
 	{
-		double soma = Lista.Sum(i => i.Total);
+		try
+		{
+			double soma = Lista.Sum(i => i.Total);
 
-		string msg = $"O Total é {soma:C}";
+			string msg = $"O Total é {soma:C}";
 
-		DisplayAlert("Total dos Produtos", msg, "OK");
+			DisplayAlert("Total dos Produtos", msg, "OK");
+		}
+		catch (Exception ex)
+		{
+			DisplayAlert("Ops", ex.Message, "OK");
+		}
 	}
 
-    private void MenuItem_Clicked(object sender, EventArgs e)
+    private async Task MenuItem_Clicked(object sender, EventArgs e)
     {
+		try //Todo o código precisa ser envolvido por Try-Catch para não fechar do nada quando houver um bug.
+		{
+			MenuItem? selecionado = sender as MenuItem;
 
+			Produto? p = selecionado.BindingContext as Produto;//Selecionando o item para excluir.
+
+			bool confirm = await DisplayAlert("Tem certeza?",$"Remover {p.Descricao}?", "Sim?", "Não");//Variável para confirmar exclusão.
+
+            if (confirm)//Comando para excluir produto.
+            {
+				await App.Db.Delete(p.Id);
+				Lista.Remove(p);//Comando para excluir o produto da observable collection.
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
     }
 }
