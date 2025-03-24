@@ -80,9 +80,9 @@ public partial class ListaProduto : ContentPage
     {
 		try //Todo o código precisa ser envolvido por Try-Catch para não fechar do nada quando houver um bug.
 		{
-			MenuItem? selecionado = sender as MenuItem;
+			MenuItem selecionado = sender as MenuItem;
 
-			Produto? p = selecionado.BindingContext as Produto;//Selecionando o item para excluir.
+			Produto p = selecionado.BindingContext as Produto;//Selecionando o item para excluir.
 
 			bool confirm = await DisplayAlert("Tem certeza?",$"Remover {p.Descricao}?", "Sim?", "Não");//Variável para confirmar exclusão.
 
@@ -97,4 +97,22 @@ public partial class ListaProduto : ContentPage
             await DisplayAlert("Ops", ex.Message, "OK");
         }
     }
+
+    private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+		try
+		{
+			Produto p = e.SelectedItem as Produto;
+
+			Navigation.PushAsync(new Views.EditarProduto
+			{
+				BindingContext = p,
+			});
+		}
+		catch (Exception ex)
+		{
+			DisplayAlert("Ops", ex.Message, "OK");
+		}
+	}
+
 }
