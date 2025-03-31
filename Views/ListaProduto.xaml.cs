@@ -84,7 +84,7 @@ public partial class ListaProduto : ContentPage
 		{
 			MenuItem selecionado = sender as MenuItem;
 
-			Produto p = selecionado.BindingContext as Produto;//Selecionando o item para excluir.
+			Produto p = (Produto)selecionado.BindingContext;//Selecionando o item para excluir.
 
 			bool confirm = await DisplayAlert("Tem certeza?",$"Remover {p.Descricao}?", "Sim?", "Não");//Variável para confirmar exclusão.
 
