@@ -22,6 +22,7 @@ namespace MauiAppMinhasCompras.Models
                 _descricao = value;
             }
         }
+        public required string Categoria { get; set; }
         public double Quantidade { get; set; }
         public double Preco { get; set; }
 

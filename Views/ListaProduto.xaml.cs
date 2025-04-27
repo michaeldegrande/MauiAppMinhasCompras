@@ -49,7 +49,9 @@ public partial class ListaProduto : ContentPage
 		{
 			string q = e.NewTextValue;
 
-			Lista.Clear();
+            lst_produtos.IsRefreshing = true;
+
+            Lista.Clear();
 
 			List<Produto> tmp = await App.Db.Search(q);
 
@@ -58,6 +60,10 @@ public partial class ListaProduto : ContentPage
 		catch (Exception ex)
 		{
 			await DisplayAlert("Ops", ex.Message, "OK");
+		}
+		finally
+		{
+			lst_produtos.IsRefreshing = false;
 		}
 	}
 
@@ -117,4 +123,58 @@ public partial class ListaProduto : ContentPage
 		}
 	}
 
+    private async void lst_produtos_Refreshing(object sender, EventArgs e)
+    {
+        try
+        {
+            Lista.Clear();
+
+            List<Produto> tmp = await App.Db.GetAll();
+
+            tmp.ForEach(i => Lista.Add(i));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
+		finally
+		{
+			lst_produtos.IsRefreshing = false;
+		}
+    }
+
+    private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
+    {
+        try
+        {
+            // Verifica se tem algum item selecionado
+            if (lst_produtos.SelectedItem == null)
+            {
+                await DisplayAlert("Atenção", "Selecione um produto para excluir.", "OK");
+                return;
+            }
+
+            // Confirma se o usuário realmente quer excluir
+            bool confirmar = await DisplayAlert("Confirmação", "Deseja excluir este produto?", "Sim", "Não");
+            if (!confirmar)
+                return;
+
+            // Pega o item selecionado
+            var itemSelecionado = lst_produtos.SelectedItem;
+
+            // Remove da lista (supondo que sua lista esteja no ItemsSource)
+            var lista = lst_produtos.ItemsSource as ObservableCollection<string>; // ou o tipo que você está usando
+            if (lista != null)
+            {
+                lista.Remove((string)itemSelecionado); // Cast se for string, ajusta se for outro objeto
+            }
+
+            // Limpa a seleção
+            lst_produtos.SelectedItem = null;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
+    }
 }
