@@ -5,7 +5,7 @@
              Title="Minhas Compras">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Somar"/>
+        <ToolbarItem Text="Somar" Clicked="Toolbaritem_Clicked_1"/>
         <ToolbarItem Text="Adicionar" Clicked="Toolbaritem_Clicked"/>
     </ContentPage.ToolbarItems>
     
@@ -13,7 +13,9 @@
         <SearchBar x:Name="txt_search"
                    Placeholder="Busque o Produto"
                    TextChanged="txt_search_TextChanged"/>
-        <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected">
+        <ListView x:Name="lst_produtos" 
+                  IsPullToRefreshEnabled="True"
+                  ItemSelected="lst_produtos_ItemSelected">
             <ListView.Header>
                 <Grid ColumnDefinitions="*, *, *, *, *">
                     <Label Grid.Column="0" Text="Id"/>
@@ -33,9 +35,9 @@
                         <Grid ColumnDefinitions="*, *, *, *, *">
                             <Label Grid.Column="0" Text="{Binding Id}"/>
                             <Label Grid.Column="1" Text="{Binding Descricao}"/>
-                            <Label Grid.Column="2" Text="{Binding Preco}"/>
+                            <Label Grid.Column="2" Text="{Binding Preco, StringFormat='{}{0:c}'}"/>
                             <Label Grid.Column="3" Text="{Binding Quantidade}"/>
-                            <Label Grid.Column="4" Text="{Binding Total}"/>
+                            <Label Grid.Column="4" Text="{Binding Total, StringFormat='{}{0:c}'}"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

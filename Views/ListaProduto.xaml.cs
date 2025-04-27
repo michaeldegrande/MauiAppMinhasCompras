@@ -78,7 +78,7 @@ public partial class ListaProduto : ContentPage
 		}
 	}
 
-    private async Task MenuItem_Clicked(object sender, EventArgs e)
+    private async void MenuItem_Clicked(object sender, EventArgs e)
     {
 		try //Todo o código precisa ser envolvido por Try-Catch para não fechar do nada quando houver um bug.
 		{
