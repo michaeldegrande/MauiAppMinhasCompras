@@ -4,29 +4,31 @@ namespace MauiAppMinhasCompras.Models
 {
     public class Produto
     {
-        string _descricao;
+        private string _descricao = string.Empty;
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
         public string Descricao
         {
             get => _descricao;
             set
             {
-                if (value == null
-                    )
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Por favor, preencha a descrição");
+                    throw new ArgumentException("Por favor, preencha a descrição.");
                 }
-
                 _descricao = value;
             }
         }
-        public required string Categoria { get; set; }
+
+        public string Categoria { get; set; } = string.Empty;
+
         public double Quantidade { get; set; }
+
         public double Preco { get; set; }
 
-        public double Total { get => Quantidade * Preco; }
-
+        [Ignore] // Não será salvo no banco
+        public double Total => Quantidade * Preco;
     }
 }
