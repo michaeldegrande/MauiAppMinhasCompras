@@ -46,6 +46,7 @@
                         <ViewCell>
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Remover" Clicked="OnRemoverClicked" CommandParameter="{Binding Id}" />
+                                <MenuItem Text="Editar" Clicked="OnEditarClicked" CommandParameter="{Binding Id}" />
                             </ViewCell.ContextActions>
                             <Grid ColumnDefinitions="30, 100, 80, 50, 90"
                                   BackgroundColor="{StaticResource Gray100}">

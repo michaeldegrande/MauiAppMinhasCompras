@@ -91,5 +91,11 @@ public partial class ListaProduto : ContentPage
     {
         await Navigation.PushAsync(new MauiAppMinhasCompras.Views.NovoProduto());
     }
+
+    private async void OnEditarClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MauiAppMinhasCompras.Views.EditarProduto());
+    }
+
 }
 
