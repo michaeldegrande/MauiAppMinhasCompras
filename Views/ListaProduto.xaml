@@ -17,11 +17,13 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Padding="10" Margin="5" BackgroundColor="Beige">
+    <StackLayout Padding="10" Margin="5" BackgroundColor="LightBlue">
 
         <SearchBar x:Name="searchBar"
                    Placeholder="Busque o Produto"
-                   TextChanged="OnSearchTextChanged" />
+                   PlaceholderColor="Gray"
+                   TextChanged="OnSearchTextChanged"
+                   BackgroundColor="White"/>
 
         <Frame Padding="0" Margin="10" VerticalOptions="FillAndExpand">
 
@@ -32,7 +34,7 @@
                       HasUnevenRows="True">
 
                 <ListView.Header>
-                    <Grid ColumnDefinitions="30, 100, 80, 50, 90">
+                    <Grid ColumnDefinitions="100, 80, 50, 90" BackgroundColor="LightBlue">
                        <!-- <Label Grid.Column="0" Text="Id" Padding="5" FontAttributes="Bold" /> -->
                         <Label Grid.Column="0" Text="Descrição" FontAttributes="Bold" />
                         <Label Grid.Column="1" Text="Preço" FontAttributes="Bold" />
@@ -48,13 +50,13 @@
                                 <MenuItem Text="Remover" Clicked="OnRemoverClicked" CommandParameter="{Binding Id}" />
                                 <MenuItem Text="Editar" Clicked="OnEditarClicked" CommandParameter="{Binding Id}" />
                             </ViewCell.ContextActions>
-                            <Grid ColumnDefinitions="30, 100, 80, 50, 90"
-                                  BackgroundColor="{StaticResource Gray100}">
+                            <Grid ColumnDefinitions="100, 80, 50, 90"
+                                  BackgroundColor="{StaticResource Gray600}">
                                 <!--<Label Grid.Column="0" Text="{Binding Id}" Padding="5"/> -->
-                                <Label Grid.Column="0" Text="{Binding Descricao}" />
-                                <Label Grid.Column="1" Text="{Binding Preco, StringFormat='R${0:F2}'}" />
-                                <Label Grid.Column="2" Text="{Binding Quantidade}" />
-                                <Label Grid.Column="3" Text="{Binding Total, StringFormat='R${0:F2}'}" />
+                                <Label Grid.Column="0" Text="{Binding Descricao}" TextColor="White" />
+                                <Label Grid.Column="1" Text="{Binding Preco, StringFormat='R${0:F2}'}" TextColor="White" />
+                                <Label Grid.Column="2" Text="{Binding Quantidade}" TextColor="White" />
+                                <Label Grid.Column="3" Text="{Binding Total, StringFormat='R${0:F2}'}" TextColor="White" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

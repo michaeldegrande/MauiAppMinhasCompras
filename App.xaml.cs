@@ -26,7 +26,12 @@ namespace MauiAppMinhasCompras
             InitializeComponent();
 
             //MainPage = new AppShell();
-            MainPage = new NavigationPage(new Views.ListaProduto());
+            MainPage = new NavigationPage(new Views.ListaProduto())
+
+            {
+                BarBackgroundColor = Colors.LightBlue,
+                BarTextColor = Colors.White
+            };
         }
     }
 }
