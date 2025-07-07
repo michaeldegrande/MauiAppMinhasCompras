@@ -1,88 +1,85 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiAppMinhasCompras.Views.ListaProduto"
-             Title="Minhas Compras">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             x:Class="MauiAppMinhasCompras.Views.ListaProduto"  
+             Title="Minhas Compras">  
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Somar" Clicked="OnSomarClicked"/>
-       
-    </ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>  
+        <ToolbarItem Text="Somar" Clicked="OnSomarClicked"/>  
+    </ContentPage.ToolbarItems>  
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Label">
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    <ContentPage.Resources>  
+        <ResourceDictionary>  
+            <Style TargetType="Label">  
+                <Setter Property="VerticalTextAlignment" Value="Center" />  
+            </Style>  
+        </ResourceDictionary>  
+    </ContentPage.Resources>  
 
-    <StackLayout Padding="10" Margin="5" BackgroundColor="LightBlue">
+    <StackLayout Padding="10" Margin="5" BackgroundColor="LightBlue">  
 
-        <SearchBar x:Name="searchBar"
-                   Placeholder="Busque o Produto"
-                   PlaceholderColor="Gray"
-                   TextChanged="OnSearchTextChanged"
-                   BackgroundColor="White"/>
+        <SearchBar x:Name="searchBar"  
+                   Placeholder="Busque o Produto"  
+                   PlaceholderColor="Gray"  
+                   TextChanged="OnSearchTextChanged"  
+                   BackgroundColor="White"/>  
 
-        <Frame Padding="0" Margin="10" VerticalOptions="FillAndExpand">
+        <Frame Padding="0" Margin="10" BorderColor="Gray">
+            <Grid RowDefinitions="*,Auto">
+                <ListView x:Name="listViewProdutos"  
+                          IsPullToRefreshEnabled="True"  
+                          Refreshing="OnProdutosRefreshing"  
+                          ItemSelected="OnProdutoSelecionado"  
+                          HasUnevenRows="True">  
 
-            <ListView x:Name="listViewProdutos"
-                      IsPullToRefreshEnabled="True"
-                      Refreshing="OnProdutosRefreshing"
-                      ItemSelected="OnProdutoSelecionado"
-                      HasUnevenRows="True">
+                    <ListView.Header>  
+                        <Grid ColumnDefinitions="100, 80, 50, 90" RowDefinitions="Auto" Padding="10" BackgroundColor="LightBlue">  
+                            <Label Grid.Column="0" Text="Descrição" FontAttributes="Bold" />  
+                            <Label Grid.Column="1" Text="Preço" FontAttributes="Bold" />  
+                            <Label Grid.Column="2" Text="Qtd" FontAttributes="Bold" />  
+                            <Label Grid.Column="3" Text="Total" FontAttributes="Bold" />  
+                        </Grid>  
+                    </ListView.Header>  
 
-                <ListView.Header>
-                    <Grid ColumnDefinitions="100, 80, 50, 90" BackgroundColor="LightBlue">
-                       <!-- <Label Grid.Column="0" Text="Id" Padding="5" FontAttributes="Bold" /> -->
-                        <Label Grid.Column="0" Text="Descrição" FontAttributes="Bold" />
-                        <Label Grid.Column="1" Text="Preço" FontAttributes="Bold" />
-                        <Label Grid.Column="2" Text="Qtd" FontAttributes="Bold" />
-                        <Label Grid.Column="3" Text="Total" FontAttributes="Bold" />
-                    </Grid>
-                </ListView.Header>
+                    <ListView.ItemTemplate>  
+                        <DataTemplate>  
+                            <ViewCell>  
+                                <ViewCell.ContextActions>  
+                                    <MenuItem Text="Remover" Clicked="OnRemoverClicked" CommandParameter="{Binding Id}" />  
+                                    <MenuItem Text="Editar" Clicked="OnEditarClicked" CommandParameter="{Binding Id}" />  
+                                </ViewCell.ContextActions>  
+                                <Grid ColumnDefinitions="100, 80, 50, 90" RowDefinitions="Auto" Padding="10"  
+                                      BackgroundColor="{StaticResource Gray600}">  
+                                    <Label Grid.Column="0" Text="{Binding Descricao}" TextColor="White" />  
+                                    <Label Grid.Column="1" Text="{Binding Preco, StringFormat='R${0:F2}'}" TextColor="White" />  
+                                    <Label Grid.Column="2" Text="{Binding Quantidade}" TextColor="White" />  
+                                    <Label Grid.Column="3" Text="{Binding Total, StringFormat='R${0:F2}'}" TextColor="White" />  
+                                </Grid>  
+                            </ViewCell>  
+                        </DataTemplate>  
+                    </ListView.ItemTemplate>  
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Text="Remover" Clicked="OnRemoverClicked" CommandParameter="{Binding Id}" />
-                                <MenuItem Text="Editar" Clicked="OnEditarClicked" CommandParameter="{Binding Id}" />
-                            </ViewCell.ContextActions>
-                            <Grid ColumnDefinitions="100, 80, 50, 90"
-                                  BackgroundColor="{StaticResource Gray600}">
-                                <!--<Label Grid.Column="0" Text="{Binding Id}" Padding="5"/> -->
-                                <Label Grid.Column="0" Text="{Binding Descricao}" TextColor="White" />
-                                <Label Grid.Column="1" Text="{Binding Preco, StringFormat='R${0:F2}'}" TextColor="White" />
-                                <Label Grid.Column="2" Text="{Binding Quantidade}" TextColor="White" />
-                                <Label Grid.Column="3" Text="{Binding Total, StringFormat='R${0:F2}'}" TextColor="White" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-
-            </ListView>
-
+                </ListView>
+            </Grid>
         </Frame>
 
-        <AbsoluteLayout>
+        <AbsoluteLayout>  
 
-            <!-- Botão de Adicionar -->
-            <Button
-        x:Name="addbutton"
-        WidthRequest="60"
-        HeightRequest="60"
-        BackgroundColor="DodgerBlue"
-        Text="+"
-        TextColor="White"
-        FontSize="30"
-        CornerRadius="30"
-        Clicked="OnAddButton_Clicked"
-        AbsoluteLayout.LayoutBounds="1,0.65,60,60"
-        AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <!-- Botão de Adicionar -->  
+            <Button  
+        x:Name="addbutton"  
+        WidthRequest="60"  
+        HeightRequest="60"  
+        BackgroundColor="DodgerBlue"  
+        Text="+"  
+        TextColor="White"  
+        FontSize="30"  
+        CornerRadius="30"  
+        Clicked="OnAddButton_Clicked"  
+        AbsoluteLayout.LayoutBounds="1,0.65,60,60"  
+        AbsoluteLayout.LayoutFlags="PositionProportional" />  
 
-        </AbsoluteLayout>
-    </StackLayout>
+        </AbsoluteLayout>  
+    </StackLayout>  
 
 </ContentPage>

@@ -30,7 +30,7 @@ namespace MauiAppMinhasCompras
 
             {
                 BarBackgroundColor = Colors.LightBlue,
-                BarTextColor = Colors.White
+                BarTextColor = Colors.Gray
             };
         }
     }
