@@ -87,7 +87,7 @@ public partial class ListaProduto : ContentPage
         await DisplayAlert("Total", $"R$ {total:F2}", "OK");
     }
 
-    private async void OnAdicionarClicked(object sender, EventArgs e)
+    private async void OnAddButton_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new MauiAppMinhasCompras.Views.NovoProduto());
     }
