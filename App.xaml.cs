@@ -29,8 +29,8 @@ namespace MauiAppMinhasCompras
             MainPage = new NavigationPage(new Views.ListaProduto())
 
             {
-                BarBackgroundColor = Colors.LightBlue,
-                BarTextColor = Colors.Gray
+                BarBackgroundColor = Colors.CornflowerBlue,
+                BarTextColor = Colors.MintCream
             };
         }
     }

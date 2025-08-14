@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiAppMinhasCompras"
     Shell.FlyoutBehavior="Disabled"
-    Title="MinhasCompras"
-    Shell.BackgroundColor="Blue">
+    Title="Minhas Compras"
+    Shell.BackgroundColor="MintCream">
     
  
 
